@@ -40,6 +40,7 @@ public class ConfigManager {
 		return null;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Map<String, String> getAllProperties() throws IOException{
 		Properties properties = new Properties();
 		FileInputStream in = new FileInputStream(PATH);

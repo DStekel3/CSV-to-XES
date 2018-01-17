@@ -25,7 +25,7 @@ public class MinerfulTraceParser implements CSVEntryParser<MinerfulTrace> {
 		timestampColumn = tsColumn;
 	}
 
-	@Override
+	
 	public MinerfulTrace parseEntry(String... data) {
 
 		String t = data[traceColumn];

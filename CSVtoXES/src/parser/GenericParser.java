@@ -38,7 +38,6 @@ public class GenericParser implements CSVEntryParser<GenericTrace> {
 	/* (non-Javadoc)
 	 * @see com.googlecode.jcsv.reader.CSVEntryParser#parseEntry(java.lang.String[])
 	 */
-   @Override
    public GenericTrace parseEntry(String... data) {
    	int traceColumn = Integer.parseInt(props.get("trace"));
    	int conceptNameColumn = Integer.parseInt(props.get("conceptName"));
@@ -46,7 +45,7 @@ public class GenericParser implements CSVEntryParser<GenericTrace> {
    	int timestampColumn = Integer.parseInt(props.get("timestamp"));
    	int resourceColumn = Integer.parseInt(props.get("resource"));
    	
-   	String t = data[traceColumn];
+   		String t = data[traceColumn];
 		String c = data[conceptNameColumn];
 		String l = data[lifecycleColumn];
 		String ts = data[timestampColumn];
@@ -64,7 +63,7 @@ public class GenericParser implements CSVEntryParser<GenericTrace> {
 			if(tokens.length > 1)
 				theDate+="T"+tokens[1]+"";
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY'T'HH:mm");
 			//SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 	      Calendar cal = Calendar.getInstance();
          
