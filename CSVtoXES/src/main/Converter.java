@@ -52,42 +52,47 @@ public class Converter {
 
 		CommandLineParser parser = new GnuParser();
 		Options options = new Options();
-		Option inFile = OptionBuilder.withArgName("input").isRequired() // make it required
-				.hasArg().withDescription("use given file as input").create("i");
+		Option inFiles = OptionBuilder.withArgName("input").isRequired() // make it required
+				.hasArg().withDescription("use given directory as input").create("i");
 
-		Option outFile = OptionBuilder.withArgName("output").isRequired() // make it required
-				.hasArg().withDescription("use given file as output").create("o");
+		Option outFiles = OptionBuilder.withArgName("output").isRequired() // make it required
+				.hasArg().withDescription("use given directory as output").create("o");
 
-		options.addOption(inFile);
-		options.addOption(outFile);
+		options.addOption(inFiles);
+		options.addOption(outFiles);
 		HelpFormatter help = new HelpFormatter();
-		String inputFile = "", outputFile = "";
+		String inputFiles = "", outputFiles = "";
 
 		try {
 			// parse the command line arguments
 			CommandLine line = parser.parse(options, args);
 			// if( line.hasOption( "i" ) ) {
-			inputFile = line.getOptionValue("i");
+			inputFiles = line.getOptionValue("i");
 			// }
-			outputFile = line.getOptionValue("o");
+			outputFiles = line.getOptionValue("o");
 
-			if (inputFile == null || outputFile == null) {
+			if (inputFiles == null || outputFiles == null) {
 				help.printHelp("Converter", options);
 				return;
 			}
 		} catch (ParseException exp) {
 			help.printHelp("Converter", options, true);
 		}
+		
+		final File inputFolder = new File(inputFiles);
+		File[] listOfFiles = inputFolder.listFiles();
+		for(File file : listOfFiles) {
+			// List<MinerfulTrace> traces = readGenericLog(inputFile);
+			List<GenericTrace> gtraces = readGenericLog2(file.toString());
+			// XLog log = toXlog(traces);
+			XLog log = toXlog2(gtraces);
+			
+			String outputFile = outputFiles + "\\" + file.getName().replaceAll(".csv", ".xes");
 
-		// List<MinerfulTrace> traces = readGenericLog(inputFile);
-		List<GenericTrace> gtraces = readGenericLog2(inputFile);
-		// XLog log = toXlog(traces);
-		XLog log = toXlog2(gtraces);
-
-		// List<EclipseDataEntry> dataEntries = readEclipseLog(inputFile);
-		// XLog log = convertEclispeDataEntries(dataEntries);
-
-		toXESfile(new File(outputFile), log);
+			// List<EclipseDataEntry> dataEntries = readEclipseLog(inputFile);
+			// XLog log = convertEclispeDataEntries(dataEntries);
+			toXESfile(new File(outputFile), log);
+		}
 	}
 
 	// private static List<EclipseDataEntry> readEclipseLog(String filename) throws
