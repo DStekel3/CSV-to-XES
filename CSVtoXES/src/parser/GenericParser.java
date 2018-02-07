@@ -31,7 +31,6 @@ public class GenericParser implements CSVEntryParser<GenericTrace> {
     */
    public GenericParser() throws IOException {
    	props = ConfigManager.getAllProperties();
-	   
    }
 	
 	
