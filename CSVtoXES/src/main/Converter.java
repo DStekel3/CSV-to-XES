@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Timestamp;
@@ -80,7 +81,12 @@ public class Converter {
 		}
 		
 		final File inputFolder = new File(inputFiles);
-		File[] listOfFiles = inputFolder.listFiles();
+		File[] listOfFiles = inputFolder.listFiles(new FilenameFilter() {
+		    @Override
+		    public boolean accept(File dir, String name) {
+		        return name.endsWith(".csv");
+		    }
+		});
 		for(File file : listOfFiles) {
 			// List<MinerfulTrace> traces = readGenericLog(inputFile);
 			List<GenericTrace> gtraces = readGenericLog2(file.toString());
