@@ -62,7 +62,7 @@ public class GenericParser implements CSVEntryParser<GenericTrace> {
 			if(tokens.length > 1)
 				theDate+="T"+tokens[1]+"";
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY'T'HH:mm");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY'T'HH:mm");
 			//SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 	      Calendar cal = Calendar.getInstance();
          

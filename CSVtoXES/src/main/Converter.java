@@ -239,5 +239,4 @@ public class Converter {
 		serializer.serialize(xLog, new FileOutputStream(file));
 
 	}
-
 }
